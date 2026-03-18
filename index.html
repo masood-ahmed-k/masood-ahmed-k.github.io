@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masood Ahmed — BI & Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e17;
+  --bg2: #111827;
+  --bg3: #1a2235;
+  --surface: #1e293b;
+  --border: #2a3650;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+  --accent3: #34d399;
+  --glow: rgba(56,189,248,0.15);
+  --font: 'DM Sans', sans-serif;
+  --display: 'Playfair Display', serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--font); background:var(--bg); color:var(--text); overflow-x:hidden; }
+
+/* NOISE OVERLAY */
+body::before {
+  content:''; position:fixed; top:0; left:0; width:100%; height:100%;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9999; opacity:0.4;
+}
+
+/* NAVIGATION */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center;
+  background:rgba(10,14,23,0.8); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+nav .logo { font-family:var(--display); font-size:1.3rem; font-weight:700; color:var(--accent); }
+nav .links { display:flex; gap:2rem; }
+nav .links a { color:var(--text2); text-decoration:none; font-size:0.85rem; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; transition:color 0.3s; }
+nav .links a:hover { color:var(--accent); }
+
+/* HERO */
+.hero {
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  position:relative; padding:6rem 2rem 4rem;
+}
+.hero::before {
+  content:''; position:absolute; top:-20%; right:-10%; width:600px; height:600px;
+  background:radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero::after {
+  content:''; position:absolute; bottom:-10%; left:-10%; width:400px; height:400px;
+  background:radial-gradient(circle, rgba(129,140,248,0.1) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-inner { max-width:900px; text-align:center; position:relative; z-index:1; }
+.hero .tag {
+  display:inline-block; padding:0.4rem 1.2rem; border-radius:100px;
+  background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3);
+  color:var(--accent); font-size:0.8rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.8s ease both;
+}
+.hero h1 {
+  font-family:var(--display); font-size:clamp(2.5rem,6vw,4.5rem); font-weight:800;
+  line-height:1.1; margin-bottom:1.5rem;
+  background:linear-gradient(135deg, var(--text) 0%, var(--accent) 50%, var(--accent2) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  animation:fadeUp 0.8s ease 0.1s both;
+}
+.hero p {
+  font-size:1.15rem; color:var(--text2); line-height:1.7; max-width:650px; margin:0 auto 2.5rem;
+  animation:fadeUp 0.8s ease 0.2s both;
+}
+.hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; animation:fadeUp 0.8s ease 0.3s both; }
+.btn {
+  display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; border-radius:12px;
+  font-family:var(--font); font-weight:600; font-size:0.9rem; text-decoration:none; transition:all 0.3s;
+  cursor:pointer; border:none;
+}
+.btn-primary { background:var(--accent); color:var(--bg); }
+.btn-primary:hover { background:#7dd3fc; transform:translateY(-2px); box-shadow:0 8px 30px rgba(56,189,248,0.3); }
+.btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+
+/* STATS BAR */
+.stats {
+  display:flex; justify-content:center; gap:3rem; padding:3rem 2rem; flex-wrap:wrap;
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  background:var(--bg2);
+}
+.stat { text-align:center; }
+.stat .num { font-family:var(--display); font-size:2.5rem; font-weight:800; color:var(--accent); }
+.stat .label { font-size:0.8rem; color:var(--text2); text-transform:uppercase; letter-spacing:0.1em; margin-top:0.3rem; }
+
+/* SECTIONS */
+section { padding:5rem 2rem; max-width:1100px; margin:0 auto; }
+.section-label {
+  display:inline-block; font-size:0.75rem; font-weight:600; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem;
+  padding:0.3rem 0.8rem; background:rgba(56,189,248,0.1); border-radius:6px;
+}
+.section-title {
+  font-family:var(--display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700;
+  margin-bottom:1rem; color:var(--text);
+}
+.section-desc { color:var(--text2); font-size:1.05rem; line-height:1.7; max-width:700px; margin-bottom:3rem; }
+
+/* SKILLS GRID */
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+.skill-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  padding:1.8rem; transition:all 0.4s;
+  position:relative; overflow:hidden;
+}
+.skill-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+.skill-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity:0; transition:opacity 0.4s;
+}
+.skill-card:hover::before { opacity:1; }
+.skill-icon { font-size:1.8rem; margin-bottom:1rem; }
+.skill-card h3 { font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--text); }
+.skill-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+.skill-tag {
+  padding:0.25rem 0.65rem; border-radius:6px; font-size:0.75rem; font-weight:500;
+  background:rgba(56,189,248,0.08); color:var(--accent); border:1px solid rgba(56,189,248,0.15);
+}
+
+/* EXPERIENCE TIMELINE */
+.timeline { position:relative; padding-left:2.5rem; }
+.timeline::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3));
+}
+.tl-item { position:relative; margin-bottom:2.5rem; }
+.tl-item::before {
+  content:''; position:absolute; left:-2.65rem; top:0.3rem;
+  width:12px; height:12px; border-radius:50%;
+  background:var(--accent); border:3px solid var(--bg);
+  box-shadow:0 0 12px var(--glow);
+}
+.tl-header { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem; }
+.tl-title { font-size:1.1rem; font-weight:700; color:var(--text); }
+.tl-date { font-size:0.8rem; color:var(--accent); font-weight:600; letter-spacing:0.05em; }
+.tl-company { font-size:0.9rem; color:var(--text2); margin-bottom:0.75rem; }
+.tl-bullets { list-style:none; }
+.tl-bullets li {
+  position:relative; padding-left:1.2rem; margin-bottom:0.5rem;
+  font-size:0.9rem; color:var(--text2); line-height:1.6;
+}
+.tl-bullets li::before { content:'›'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+
+/* PROJECT CARDS */
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; }
+.project-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; transition:all 0.4s;
+}
+.project-card:hover { border-color:var(--accent2); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+.project-banner {
+  height:180px; display:flex; align-items:center; justify-content:center;
+  font-size:3rem; position:relative; overflow:hidden;
+}
+.project-banner.churn { background:linear-gradient(135deg, #1e3a5f, #0f766e); }
+.project-banner.thesis { background:linear-gradient(135deg, #312e81, #581c87); }
+.project-body { padding:1.5rem; }
+.project-body h3 { font-size:1.1rem; font-weight:700; margin-bottom:0.5rem; }
+.project-body p { font-size:0.88rem; color:var(--text2); line-height:1.6; margin-bottom:1rem; }
+.project-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+.project-tag {
+  padding:0.2rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:600;
+  background:rgba(129,140,248,0.1); color:var(--accent2); border:1px solid rgba(129,140,248,0.2);
+}
+
+/* CERTIFICATIONS */
+.cert-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem; }
+.cert-card {
+  display:flex; align-items:flex-start; gap:1rem; padding:1.2rem 1.5rem;
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  transition:all 0.3s;
+}
+.cert-card:hover { border-color:var(--accent3); }
+.cert-badge {
+  width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem; flex-shrink:0;
+}
+.cert-badge.gcp { background:rgba(52,211,153,0.15); }
+.cert-badge.pbi { background:rgba(251,191,36,0.15); }
+.cert-badge.sap { background:rgba(56,189,248,0.15); }
+.cert-info h4 { font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
+.cert-info span { font-size:0.78rem; color:var(--text2); }
+
+/* CONTACT */
+.contact-section {
+  text-align:center; padding:5rem 2rem;
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+}
+.contact-links { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-top:2rem; }
+.contact-link {
+  display:flex; align-items:center; gap:0.6rem; padding:0.8rem 1.5rem;
+  background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  color:var(--text); text-decoration:none; font-size:0.9rem; font-weight:500;
+  transition:all 0.3s;
+}
+.contact-link:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+
+/* FOOTER */
+footer {
+  text-align:center; padding:2rem; border-top:1px solid var(--border);
+  font-size:0.8rem; color:var(--text2);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.reveal { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+  nav .links { display:none; }
+  .stats { gap:1.5rem; }
+  .stat .num { font-size:2rem; }
+  .tl-header { flex-direction:column; }
+  section { padding:3rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">MA</div>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tag">Open to Data Analyst roles in Germany</div>
+    <h1>Turning Raw Data Into Business Decisions</h1>
+    <p>BI & Data Analyst with 2+ years building Power BI dashboards, writing SQL across 10,000+ records, and delivering data-driven insights for cross-functional stakeholders. MSc in Data Science & AI from Berlin.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">&#9881; View My Work</a>
+      <a href="#contact" class="btn btn-ghost">&#9993; Get In Touch</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="num">2+</div><div class="label">Years at Quantiphi</div></div>
+  <div class="stat"><div class="num">10K+</div><div class="label">Session Logs Analysed</div></div>
+  <div class="stat"><div class="num">40%</div><div class="label">Agent Accuracy Improvement</div></div>
+  <div class="stat"><div class="num">5</div><div class="label">Production Chatbots</div></div>
+  <div class="stat"><div class="num">6</div><div class="label">Cloud Certifications</div></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">About Me</div>
+    <div class="section-title">From Chatbot Logs to Executive Dashboards</div>
+    <div class="section-desc">
+      I spent 2+ years at Quantiphi — a global AI consultancy — where I owned the full analytics cycle: querying raw session data in SQL, building Power BI dashboards from scratch, defining KPIs, and presenting performance insights directly to engineering and product stakeholders. I relocated to Berlin to complete my MSc in Data Science & AI at GISMA, where I published research on disease outbreak prediction using machine learning. Now I'm looking for my next challenge as a BI or Data Analyst in Germany.
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <span class="skill-tag" style="font-size:0.85rem;padding:0.4rem 1rem;">&#127758; Based in Berlin</span>
+      <span class="skill-tag" style="font-size:0.85rem;padding:0.4rem 1rem;">&#127891; MSc Data Science & AI</span>
+      <span class="skill-tag" style="font-size:0.85rem;padding:0.4rem 1rem;">&#127467;&#127479; English & Hindi Native | German A2</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-label">Technical Skills</div>
+    <div class="section-title">What I Work With</div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#128202;</div>
+      <h3>Analytics & Business Intelligence</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">Pivot Tables</span>
+        <span class="skill-tag">Google Sheets</span>
+        <span class="skill-tag">Data Visualization</span>
+        <span class="skill-tag">KPI Design</span>
+        <span class="skill-tag">Ad Hoc Reporting</span>
+        <span class="skill-tag">Trend Analysis</span>
+        <span class="skill-tag">Data Cleaning</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#128187;</div>
+      <h3>Languages & Libraries</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+        <span class="skill-tag">Jupyter</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#9881;</div>
+      <h3>Data Methods</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">ETL</span>
+        <span class="skill-tag">Data Modelling</span>
+        <span class="skill-tag">Data Mining</span>
+        <span class="skill-tag">Statistical Analysis</span>
+        <span class="skill-tag">Regression Analysis</span>
+        <span class="skill-tag">Predictive Analysis</span>
+        <span class="skill-tag">Forecasting</span>
+        <span class="skill-tag">A/B Testing</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#9729;</div>
+      <h3>Cloud & Platforms</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Google Cloud Platform</span>
+        <span class="skill-tag">BigQuery</span>
+        <span class="skill-tag">Firestore</span>
+        <span class="skill-tag">Cloud Storage</span>
+        <span class="skill-tag">Dialogflow</span>
+        <span class="skill-tag">SAP Business Data Cloud</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#128736;</div>
+      <h3>Tools & Practices</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Data Pipeline Design</span>
+        <span class="skill-tag">Data Governance</span>
+        <span class="skill-tag">Data Integration</span>
+        <span class="skill-tag">Data Storytelling</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">Work Experience</div>
+    <div class="section-title">Where I've Made Impact</div>
+  </div>
+  <div class="timeline reveal">
+
+    <div class="tl-item">
+      <div class="tl-header">
+        <span class="tl-title">Framework Engineer (Analytics & Automation)</span>
+        <span class="tl-date">Jan 2023 — Nov 2023</span>
+      </div>
+      <div class="tl-company">Quantiphi Analytics · Bangalore, India</div>
+      <ul class="tl-bullets">
+        <li>Reduced unresolved user queries by 15–20% by designing Power BI data visualizations across 5 production chatbots — enabling data-driven decisions by engineering and product stakeholders.</li>
+        <li>Identified 3 critical user drop-off points by performing data analysis on 10,000+ session logs using SQL, directly changing the product roadmap.</li>
+        <li>Cut weekly analysis turnaround from 10 hours to 5 hours by automating ETL and data validation workflows — enabling same-sprint ad hoc reporting for cross-functional teams.</li>
+        <li>Improved virtual agent accuracy by 40% by mining intent misclassification patterns and presenting results through data storytelling in weekly stakeholder reviews.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-header">
+        <span class="tl-title">Framework Engineer (Analytics & Automation)</span>
+        <span class="tl-date">Dec 2021 — Jan 2023</span>
+      </div>
+      <div class="tl-company">Quantiphi Analytics · Bangalore, India</div>
+      <ul class="tl-bullets">
+        <li>Defined and implemented 3 core KPIs (fallback rate, response latency, user satisfaction score) — adopted as the standard monitoring framework across all 5 agents.</li>
+        <li>Reduced data quality issues by 30% by enforcing data governance standards through SQL validation on 500+ records per agent per cycle.</li>
+        <li>Owned the GCP data pipeline setup across 5 agents, ensuring zero downtime for analytics data availability.</li>
+        <li>Shortened new agent development time by ~2 weeks by designing reusable Dialogflow architectures and data integration templates.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-header">
+        <span class="tl-title">Development Intern (Analytics & Automation)</span>
+        <span class="tl-date">Aug 2021 — Dec 2021</span>
+      </div>
+      <div class="tl-company">Quantiphi Analytics · Bangalore, India</div>
+      <ul class="tl-bullets">
+        <li>First independent analytical contribution to a production system — identified 4 high-failure intents via SQL, improving accuracy from 65% to 85% after retraining.</li>
+        <li>Designed a CMS-to-Firestore pipeline that automated CSV ingestion, saving 5+ hours per week.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-header">
+        <span class="tl-title">Research Analyst (R&D Intern)</span>
+        <span class="tl-date">Mar 2021 — Jul 2021</span>
+      </div>
+      <div class="tl-company">Oretes Consulting Pvt. Ltd. · Remote, India</div>
+      <ul class="tl-bullets">
+        <li>Benchmarked RASA vs. IBM Watson across NLP dimensions, producing a report that informed the company's chatbot platform selection.</li>
+        <li>Deployed a 16-intent insurance virtual agent on RASA integrated into Slack, reducing manual query handling by 30%.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">Featured Projects</div>
+    <div class="section-title">Data Analysis in Action</div>
+    <div class="section-desc">Real projects demonstrating end-to-end analytical thinking — from raw data to actionable business insight.</div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-banner churn">
+        <span>&#128200;</span>
+      </div>
+      <div class="project-body">
+        <h3>Telecom Customer Churn Dashboard</h3>
+        <p>Analysed 7,000+ customer records in Power BI to identify key churn drivers. Built a 3-page executive dashboard using calculated measures, demographic segmentation, and contract-type breakdown — surfacing actionable retention recommendations across age groups, international plans, and payment methods.</p>
+        <div class="project-tags">
+          <span class="project-tag">Power BI</span>
+          <span class="project-tag">Data Visualization</span>
+          <span class="project-tag">DAX</span>
+          <span class="project-tag">Business Intelligence</span>
+          <span class="project-tag">Churn Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-banner thesis">
+        <span>&#129516;</span>
+      </div>
+      <div class="project-body">
+        <h3>Disease Outbreak Prediction (MSc Thesis)</h3>
+        <p>Built and evaluated ML models (LSTM, Neural Networks, ARIMA, Decision Trees) on epidemiological and climate datasets. Neural Network outperformed baseline by 27% on RMSE. Applied predictive analysis, regression analysis, and forecasting across integrated multi-domain data.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">TensorFlow</span>
+          <span class="project-tag">LSTM</span>
+          <span class="project-tag">ARIMA</span>
+          <span class="project-tag">Statistical Analysis</span>
+          <span class="project-tag">Published Research</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-banner" style="background:linear-gradient(135deg,#1e293b,#334155);">
+        <span>&#129302;</span>
+      </div>
+      <div class="project-body">
+        <h3>Chatbot Analytics Pipeline (Quantiphi)</h3>
+        <p>Owned end-to-end analytics across 5 production virtual agents — from raw GCP session logs to Power BI dashboards. Defined KPIs, automated ETL workflows, identified user drop-off patterns, and presented weekly data storytelling reports to engineering stakeholders.</p>
+        <div class="project-tags">
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">GCP</span>
+          <span class="project-tag">Power BI</span>
+          <span class="project-tag">ETL</span>
+          <span class="project-tag">KPI Design</span>
+          <span class="project-tag">Data Pipeline</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="reveal">
+    <div class="section-label">Certifications</div>
+    <div class="section-title">Credentials & Learning</div>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-badge gcp">&#9729;</div>
+      <div class="cert-info"><h4>Google Associate Cloud Engineer</h4><span>Google Cloud · Mar 2023</span></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge pbi">&#128202;</div>
+      <div class="cert-info"><h4>Introduction to Power BI</h4><span>DataCamp · Feb 2026</span></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge sap">&#9881;</div>
+      <div class="cert-info"><h4>SAP Business Data Cloud</h4><span>SAP · Jan 2026</span></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge gcp">&#129302;</div>
+      <div class="cert-info"><h4>Prompt Engineering Guide</h4><span>Google Cloud · Jan 2026</span></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge gcp">&#128172;</div>
+      <div class="cert-info"><h4>Contact Center AI</h4><span>Google Cloud</span></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge gcp">&#9889;</div>
+      <div class="cert-info"><h4>Cloud Essentials & Engineering</h4><span>Google Cloud</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section>
+  <div class="reveal">
+    <div class="section-label">Education</div>
+    <div class="section-title">Academic Background</div>
+  </div>
+  <div class="skill-card reveal" style="max-width:600px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;">
+      <h3 style="font-size:1.1rem;">M.Sc. Data Science, AI & Digital Business</h3>
+      <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">2024 — 2025</span>
+    </div>
+    <p style="color:var(--text2);font-size:0.9rem;margin-bottom:0.75rem;">GISMA University of Applied Sciences, Berlin</p>
+    <p style="color:var(--text2);font-size:0.85rem;line-height:1.6;">
+      Thesis: "Predicting Disease Outbreaks Using Machine Learning and Public Health Data" — Neural Network outperformed baseline by 27% on RMSE. Published Dec 2025.<br>
+      <span style="color:var(--accent);font-size:0.8rem;">DOI: 10.13140/RG.2.2.35607.23208</span>
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="reveal">
+    <div class="section-label">Let's Connect</div>
+    <div class="section-title" style="margin-bottom:0.5rem;">Ready for My Next Challenge</div>
+    <p style="color:var(--text2);font-size:1.05rem;max-width:550px;margin:0 auto 2rem;line-height:1.7;">
+      I'm actively looking for BI & Data Analyst roles in Germany. If you're hiring or know someone who is, I'd love to connect.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:masood.nfc@gmail.com" class="contact-link">&#9993; masood.nfc@gmail.com</a>
+      <a href="tel:+4916099582612" class="contact-link">&#128222; +49 1609 95826127</a>
+      <a href="https://linkedin.com/in/masood-ahmed-ka" target="_blank" class="contact-link">&#128101; LinkedIn</a>
+      <a href="https://github.com/masood-ahmed-k" target="_blank" class="contact-link">&#128187; GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Masood Ahmed Khalid Ahmed · Built with purpose in Berlin</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth nav scroll
+document.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
